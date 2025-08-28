@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exotic Cars - Loading</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            /* Ensure this path is correct relative to splash_screen.html */
+            background-image: url('images/splash_screen.jpg'); 
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column; /* Allow content to stack */
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-color: #000; /* Fallback for background */
+        }
+        .splash-logo {
+            width: 250px; /* Increased size for splash screen logo */
+            height: auto;
+            margin-bottom: 30px;
+            opacity: 0; /* Start hidden */
+            animation: fadeIn 1s ease-out forwards; /* Fade in */
+        }
+        .loading-text {
+            color: #e0b100; /* Gold/Yellow theme color */
+            font-family: 'Montserrat', sans-serif; /* Consistent font */
+            font-size: 2.8em; /* Slightly larger text */
+            text-shadow: 0 0 20px rgba(224, 177, 0, 0.8); /* Glow effect */
+            letter-spacing: 2px;
+            opacity: 0; /* Start hidden */
+            animation: fadeIn 1s ease-out 0.5s forwards, pulse 2s infinite alternate ease-in-out 1.5s; /* Fade in after logo, then pulse */
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                text-shadow: 0 0 20px rgba(224, 177, 0, 0.8);
+            }
+            100% {
+                transform: scale(1.03);
+                text-shadow: 0 0 30px rgba(224, 177, 0, 1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .splash-logo {
+                width: 200px;
+            }
+            .loading-text {
+                font-size: 2.2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .splash-logo {
+                width: 150px;
+            }
+            .loading-text {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="images/logo.png" alt="Exotic Cars Logo" class="splash-logo">
+    <div class="loading-text">Loading Exotic Cars...</div>
+
+    <script>
+        // Redirect to home_page.html after 3 seconds
+        setTimeout(function() {
+            window.location.href = 'home_page.html';
+        }, 3000); // 3000 milliseconds = 3 seconds
+    </script>
+</body>
+</html>

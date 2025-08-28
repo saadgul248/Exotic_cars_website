@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Detail - Exotic Cars</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-content">
+            <a href="home_page.html" class="logo-link">
+                <img src="images/logo.png" alt="Exotic Cars Logo" class="header-logo">
+            </a>
+            <a href="home_page.html" class="back-link">&larr; Back to Inventory</a>
+        </div>
+        <h1 class="car-model-name" id="carDetailTopName"></h1> 
+    </header>
+
+    <div class="detail-container">
+        <div class="detail-image-section">
+            <img id="carDetailImage" src="" alt="Car Image" class="detail-image">
+            <div id="galleryImages" class="gallery-images">
+                <button class="gallery-nav left"><i class="fas fa-chevron-left"></i></button>
+                <!-- Gallery thumbnails will be loaded here by JavaScript -->
+                <button class="gallery-nav right"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <div class="detail-info-section">
+            <div class="car-price-display">
+                <span class="price-label">Price:</span> <span id="carDetailPrice" class="actual-price"></span>
+            </div>
+
+            <div class="specifications">
+                <div class="spec-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Year</span>
+                    <span id="carDetailYear"></span>
+                </div>
+                <div class="spec-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Kilometers</span>
+                    <span id="carDetailKilometers"></span>
+                </div>
+                <div class="spec-item">
+                    <i class="fas fa-cogs"></i>
+                    <span>Transmission</span>
+                    <span id="carDetailTransmission"></span>
+                </div>
+                <div class="spec-item">
+                    <i class="fas fa-paint-brush"></i>
+                    <span>Exterior Color</span>
+                    <span id="carDetailExteriorColor"></span>
+                </div>
+                <div class="spec-item">
+                    <i class="fas fa-fill-drip"></i>
+                    <span>Interior Color</span>
+                    <span id="carDetailInteriorColor"></span>
+                </div>
+                <div class="spec-item">
+                    <i class="fas fa-horse-head"></i>
+                    <span>Horse Power</span>
+                    <span id="carDetailHorsePower"></span>
+                </div>
+                <div class="spec-item">
+                    <i class="fas fa-engine"></i>
+                    <span>Engine Size</span>
+                    <span id="carDetailEngineSize"></span>
+                </div>
+                <div class="spec-item">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Specs</span>
+                    <span id="carDetailSpecs"></span>
+                </div>
+                <div class="spec-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Warranty</span>
+                    <span id="carDetailWarranty"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const carData = {
+            "Ferrari Testarossa": {
+                mainImage: "images/Ferrari/Ferrari Testarossa.jpg",
+                images: Array.from({length: 10}, (_, i) => `images/Ferrari/Ferrari Testarossa ${i + 1}.jpg`),
+                description: "The iconic Ferrari Testarossa, a symbol of 80s automotive extravagance and performance.",
+                year: "1984-1991",
+                kilometers: "Low mileage",
+                transmission: "Manual",
+                exteriorColor: "Rosso Corsa",
+                interiorColor: "Black Leather",
+                horsePower: "390 HP",
+                engineSize: "4.9L Flat-12",
+                specs: "Classic, RWD",
+                warranty: "N/A (Vintage)",
+                price: "$250,000" // Set a price here
+            },
+            "Lamborghini Huracan Spyder": {
+                mainImage: "images/Lamborghini Huracan/Lamborghini Huracan Spyder.jpg",
+                images: Array.from({length: 10}, (_, i) => `images/Lamborghini Huracan/Lamborghini Huracan Spyder ${i + 1}.jpg`),
+                description: "Experience the thrill of open-top driving with the breathtaking Lamborghini Huracan Spyder.",
+                year: "2023",
+                kilometers: "500",
+                transmission: "Automatic",
+                exteriorColor: "Verde Mantis",
+                interiorColor: "Nero Ade + Green",
+                horsePower: "640 HP",
+                engineSize: "5.2L V10",
+                specs: "AWD, Convertible",
+                warranty: "Manufacturer Warranty",
+                price: "$320,000"
+            },
+            "Lamborghini Revuelto": {
+                mainImage: "images/Lamborghini Revuelto/Lamborghini Revuelto.jpg",
+                images: Array.from({length: 10}, (_, i) => `images/Lamborghini Revuelto/Lamborghini Revuelto ${i + 1}.jpg`),
+                description: "The revolutionary Lamborghini Revuelto, a hybrid supercar pushing the boundaries of performance.",
+                year: "2025",
+                kilometers: "100",
+                transmission: "Automatic",
+                exteriorColor: "Oro Elios",
+                interiorColor: "Purple + Black",
+                horsePower: "900+ HP",
+                engineSize: "6.5L V12 + Electric Motors",
+                specs: "Hybrid, AWD",
+                warranty: "Included + Service",
+                price: "$600,000"
+            },
+            "McLaren 720S Spider": {
+                mainImage: "images/Mclaren Spider/Mclaren 720s Spider.jpg",
+                images: Array.from({length: 10}, (_, i) => `images/Mclaren Spider/Mclaren 720s Spider ${i + 1}.jpg`),
+                description: "Unleash extreme performance with the McLaren 720S Spider, a convertible designed for speed.",
+                year: "2024",
+                kilometers: "250",
+                transmission: "Automatic",
+                exteriorColor: "Memphis Red",
+                interiorColor: "Black Alcantara",
+                horsePower: "710 HP",
+                engineSize: "4.0L Twin-Turbo V8",
+                specs: "RWD, Carbon Fiber Chassis",
+                warranty: "Manufacturer Warranty",
+                price: "$350,000"
+            },
+            "Mercedes-Benz G63 AMG": {
+                mainImage: "images/Mercedes Benz/Mercedes Benz G63 AMG.jpg",
+                images: Array.from({length: 10}, (_, i) => `images/Mercedes Benz/Mercedes Benz G63 AMG ${i + 1}.jpg`),
+                description: "The Mercedes-Benz G63 AMG: iconic luxury SUV, unmatched in presence and capability.",
+                year: "2024",
+                kilometers: "1000",
+                transmission: "Automatic",
+                exteriorColor: "Obsidian Black Metallic",
+                interiorColor: "Nappa Leather Red",
+                horsePower: "577 HP",
+                engineSize: "4.0L Bi-Turbo V8",
+                specs: "4x4, Luxury Off-Road",
+                warranty: "Manufacturer Warranty",
+                price: "$180,000"
+            },
+            "Mercedes-Benz SLS": {
+                mainImage: "images/Mercedes SLS/Mercedes Benz SLS.jpg",
+                images: Array.from({length: 10}, (_, i) => `images/Mercedes SLS/Mercedes Benz SLS ${i + 1}.jpg`),
+                description: "The Mercedes-Benz SLS AMG: a modern classic with distinctive gullwing doors and powerful performance.",
+                year: "2010-2014",
+                kilometers: "Low mileage",
+                transmission: "Automatic",
+                exteriorColor: "Silver Metallic",
+                interiorColor: "Black Leather",
+                horsePower: "563 HP",
+                engineSize: "6.2L V8",
+                specs: "Gullwing Doors, RWD",
+                warranty: "Used Car Warranty",
+                price: "$200,000" // Set a price here
+            },
+            "Porsche 911 GT3 RS": {
+                mainImage: "images/Porsche 911/Porsche 911 GT3 RS.jpg",
+                images: Array.from({length: 10}, (_, i) => `images/Porsche 911/Porsche 911 GT3 RS ${i + 1}.jpg`),
+                description: "The ultimate track weapon, the Porsche 911 GT3 RS delivers an unparalleled driving experience.",
+                year: "2024",
+                kilometers: "50",
+                transmission: "PDK (Automatic)",
+                exteriorColor: "Python Green",
+                interiorColor: "Black Race-Tex",
+                horsePower: "525 HP",
+                engineSize: "4.0L Flat-6",
+                specs: "Track Focused, Rear Wing",
+                warranty: "Manufacturer Warranty",
+                price: "$250,000"
+            },
+            "Rolls-Royce Cullinan": {
+                mainImage: "images/Rolls Royce/Rolls Royce Cullinan.jpg",
+                images: Array.from({length: 10}, (_, i) => `images/Rolls Royce/Rolls Royce Cullinan ${i + 1}.jpg`),
+                description: "Experience unparalleled luxury and refinement with the Rolls-Royce Cullinan SUV.",
+                year: "2023",
+                kilometers: "800",
+                transmission: "Automatic",
+                exteriorColor: "Black Diamond",
+                interiorColor: "Ardent Red + Black",
+                horsePower: "563 HP",
+                engineSize: "6.75L Twin-Turbo V12",
+                specs: "Ultra Luxury, AWD",
+                warranty: "Manufacturer Warranty",
+                price: "$400,000"
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const carName = params.get('car');
+            const carDetailTopName = document.getElementById('carDetailTopName');
+            const carDetailImage = document.getElementById('carDetailImage');
+            const galleryImagesContainer = document.getElementById('galleryImages');
+            const galleryThumbnailsContainer = document.createElement('div');
+            galleryThumbnailsContainer.classList.add('gallery-thumbnails');
+            galleryImagesContainer.insertBefore(galleryThumbnailsContainer, galleryImagesContainer.querySelector('.gallery-nav.right'));
+
+
+            const galleryNavLeft = galleryImagesContainer.querySelector('.gallery-nav.left');
+            const galleryNavRight = galleryImagesContainer.querySelector('.gallery-nav.right');
+            const carDetailPrice = document.getElementById('carDetailPrice');
+            let currentGalleryIndex = 0;
+
+            const updateMainImage = () => {
+                const car = carData[carName];
+                if (car && car.images && car.images.length > 0) {
+                    carDetailImage.src = car.images[currentGalleryIndex];
+                    carDetailImage.alt = `${carName} - Image ${currentGalleryIndex + 1}`;
+                }
+            };
+
+            const displayGalleryThumbnails = (images) => {
+                galleryThumbnailsContainer.innerHTML = ''; // Clear existing thumbnails
+
+                images.forEach((imagePath, i) => {
+                    const img = document.createElement('img');
+                    img.src = imagePath;
+                    img.alt = `${carName} Thumbnail ${i + 1}`;
+                    img.classList.add('thumbnail');
+                    if (i === currentGalleryIndex) {
+                        img.classList.add('active');
+                    }
+                    img.addEventListener('click', () => {
+                        currentGalleryIndex = i;
+                        updateMainImage();
+                        displayGalleryThumbnails(images); // Re-render to update active state
+                    });
+                    galleryThumbnailsContainer.appendChild(img);
+                });
+
+                // Show/hide navigation buttons based on image count
+                galleryNavLeft.style.display = images.length > 1 ? 'block' : 'none';
+                galleryNavRight.style.display = images.length > 1 ? 'block' : 'none';
+            };
+
+
+            if (carName && carData[carName]) {
+                const car = carData[carName];
+                carDetailTopName.textContent = carName; 
+
+                // Ensure the main home page image is always the first in the gallery
+                // and set it as the initial displayed image.
+                const allCarImages = [car.mainImage, ...car.images.filter(img => img !== car.mainImage)];
+                car.images = allCarImages; // Update the car.images array to prioritize the mainImage
+
+                currentGalleryIndex = 0; // Always start with the first image (which is now car.mainImage)
+                carDetailImage.src = car.mainImage; // Set the main image explicitly
+                carDetailImage.alt = `${carName} - Main Image`;
+
+                updateMainImage(); // This will use currentGalleryIndex=0 which is now the mainImage
+                displayGalleryThumbnails(car.images);
+
+                galleryNavLeft.addEventListener('click', () => {
+                    if (currentGalleryIndex > 0) {
+                        currentGalleryIndex--;
+                        updateMainImage();
+                        displayGalleryThumbnails(car.images);
+                    }
+                });
+
+                galleryNavRight.addEventListener('click', () => {
+                    if (currentGalleryIndex < car.images.length - 1) {
+                        currentGalleryIndex++;
+                        updateMainImage();
+                        displayGalleryThumbnails(car.images);
+                    }
+                });
+
+                document.getElementById('carDetailYear').textContent = car.year;
+                document.getElementById('carDetailKilometers').textContent = car.kilometers;
+                document.getElementById('carDetailTransmission').textContent = car.transmission;
+                document.getElementById('carDetailExteriorColor').textContent = car.exteriorColor;
+                document.getElementById('carDetailInteriorColor').textContent = car.interiorColor;
+                document.getElementById('carDetailHorsePower').textContent = car.horsePower;
+                document.getElementById('carDetailEngineSize').textContent = car.engineSize;
+                document.getElementById('carDetailSpecs').textContent = car.specs;
+                document.getElementById('carDetailWarranty').textContent = car.warranty;
+                carDetailPrice.textContent = car.price;
+            } else {
+                carDetailTopName.textContent = "Car Not Found";
+                carDetailImage.src = ""; 
+                carDetailImage.alt = "Car Not Found";
+                
+                document.querySelector('.detail-info-section .specifications').style.display = 'none';
+                document.querySelector('.car-price-display').style.display = 'none';
+                galleryImagesContainer.style.display = 'none'; // Hide the entire gallery section
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Car Inventory</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <a href="home_page.html" class="logo-link">
+                <img src="images/logo.png" alt="Exotic Cars Logo" class="header-logo">
+            </a>
+            <h1>Inventory</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="inventory-grid">
+            <div class="car-item" onclick="viewCarDetail('Ferrari Testarossa')">
+                <img src="images/Ferrari/Ferrari Testarossa.jpg" alt="Ferrari Testarossa">
+                <div class="car-details">
+                    <h2>Ferrari Testarossa</h2>
+                    <p>Classic Sports Car</p>
+                    <span class="view-details-btn">View Details</span>
+                </div>
+            </div>
+
+            <div class="car-item" onclick="viewCarDetail('Lamborghini Huracan Spyder')">
+                <img src="images/Lamborghini Huracan/Lamborghini Huracan Spyder.jpg" alt="Lamborghini Huracan Spyder">
+                <div class="car-details">
+                    <h2>Lamborghini Huracan Spyder</h2>
+                    <p>Exotic Convertible</p>
+                    <span class="view-details-btn">View Details</span>
+                </div>
+            </div>
+
+            <div class="car-item" onclick="viewCarDetail('Lamborghini Revuelto')">
+                <img src="images/Lamborghini Revuelto/Lamborghini Revuelto.jpg" alt="Lamborghini Revuelto">
+                <div class="car-details">
+                    <h2>Lamborghini Revuelto</h2>
+                    <p>Hybrid Supercar</p>
+                    <span class="view-details-btn">View Details</span>
+                </div>
+            </div>
+
+            <div class="car-item" onclick="viewCarDetail('McLaren 720S Spider')">
+                <img src="images/Mclaren Spider/Mclaren 720s Spider.jpg" alt="Mclaren 720s Spider">
+                <div class="car-details">
+                    <h2>McLaren 720S Spider</h2>
+                    <p>High-Performance Convertible</p>
+                    <span class="view-details-btn">View Details</span>
+                </div>
+            </div>
+
+            <div class="car-item" onclick="viewCarDetail('Mercedes-Benz G63 AMG')">
+                <img src="images/Mercedes Benz/Mercedes Benz G63 AMG.jpg" alt="Mercedes Benz G63 AMG">
+                <div class="car-details">
+                    <h2>Mercedes-Benz G63 AMG</h2>
+                    <p>Luxury Off-Road SUV</p>
+                    <span class="view-details-btn">View Details</span>
+                </div>
+            </div>
+
+            <div class="car-item" onclick="viewCarDetail('Mercedes-Benz SLS')">
+                <img src="images/Mercedes SLS/Mercedes Benz SLS.jpg" alt="Mercedes Benz SLS">
+                <div class="car-details">
+                    <h2>Mercedes-Benz SLS</h2>
+                    <p>Gullwing Sports Car</p>
+                    <span class="view-details-btn">View Details</span>
+                </div>
+            </div>
+
+            <div class="car-item" onclick="viewCarDetail('Porsche 911 GT3 RS')">
+                <img src="images/Porsche 911/Porsche 911 GT3 RS.jpg" alt="Porsche 911 GT3 RS">
+                <div class="car-details">
+                    <h2>Porsche 911 GT3 RS</h2>
+                    <p>Track-Focused Sports Car</p>
+                    <span class="view-details-btn">View Details</span>
+                </div>
+            </div>
+
+            <div class="car-item" onclick="viewCarDetail('Rolls-Royce Cullinan')">
+                <img src="images/Rolls Royce/Rolls Royce Cullinan.jpg" alt="Rolls Royce Cullinan">
+                <div class="car-details">
+                    <h2>Rolls-Royce Cullinan</h2>
+                    <p>Ultra-Luxury SUV</p>
+                    <span class="view-details-btn">View Details</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function viewCarDetail(carName) {
+            window.location.href = `detail.html?car=${encodeURIComponent(carName)}`;
+        }
+    </script>
+
+</body>
+</html>
